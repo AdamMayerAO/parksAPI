@@ -28,14 +28,16 @@ function displayResults(responseJson) {
 };
 
 function getNatlParks(query, maxResults) {
+  const codes = query.split(',').map(code=>'stateCode='+code).join('&')
+  
   const params= {
-    stateCode: query,
+    //stateCode: query,
     limit: maxResults,
     api_key: "sSuCHy3jDscyCHnChNVqaQmZsXU09OlkcjXne6ta",
   }
   const queryString = formatQueryParams(params)
-  const url = baseURL + '?' + queryString;
-
+  const url = baseURL + '?' + 'stateCode='+ query+'&' + queryString;
+console.log(url)
   fetch(url)
     .then(response => {
       if (response.ok) {
